@@ -8,7 +8,24 @@ async function getAll() {
     return query(`SELECT * FROM products`);
 }
 
+async function addProduct(newProductInfo) {
+    return query (`INSERT INTO products SET ?`, [newProductInfo]);
+}
+
+
+async function updateProduct(id, updatedProductInfo){
+    return query("UPDATE products SET ? WHERE ProductID = ?", [updatedProductInfo, id]);
+}
+
+async function deleteProduct(id) {
+    return query("DELETE FROM products WHERE ProductID = ?", [id]);
+}
+
+
 export default {
     getOne,
-    getAll
+    getAll,
+    addProduct,
+    updateProduct,
+    deleteProduct
 }

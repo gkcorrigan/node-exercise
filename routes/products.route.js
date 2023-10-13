@@ -10,11 +10,10 @@ router.get("/:id?", async (req, res, next) => {
     let data;
 
     if (id) {
-      data = await db.getOne(id);
+      data = await ProductsController.getOne(id);
     } else {
-      data = await db.getAll();
+      data = await ProductsController.getAll();
     }
-console.log(data);
     res.json(data);
   } catch (error) {
     next(error);
@@ -25,10 +24,11 @@ router.post("/", async (req, res, next) => {
   try {
     const newProduct = req.body;
     //We should check that newProduct is an object that aligns with the
-    //date we want, not just any object with any information
-    const data = await db.add(newProduct);
+    //data we want, not just any object with any information
+    const data = await ProductsController.addProduct(newProduct);
+    
     res.json(data);
-    // TODO
+    
   } catch (error) {
     next(error);
   }
@@ -42,7 +42,7 @@ router.put("/:id", async (req, res, next) => {
     const updatedProduct = req.body;
 
     //actually updates the resource and returns data about how that went
-    const data = await db.update(id, updatedProduct);
+    const data = await ProductsController.updateProduct(id, updatedProduct);
     //informing the requestor how that went
     res.json(data);
     // TODO
@@ -55,7 +55,7 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     // TODO
-    const data = await db.remove(id);
+    const data = await ProductsController.deleteProduct(id);
     res.json(data);
   } catch (error) {
     next(error);
