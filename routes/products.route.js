@@ -1,5 +1,5 @@
 import express from "express";
-import db from "../mockdb";
+import ProductsController from "../controllers/products.controller.js";
 
 //creating a sub route for our server to use
 const router = express.Router();
@@ -23,10 +23,10 @@ console.log(data);
 
 router.post("/", async (req, res, next) => {
   try {
-    const newUser = req.body;
-    //We should check that newUser is an object that aligns with the
+    const newProduct = req.body;
+    //We should check that newProduct is an object that aligns with the
     //date we want, not just any object with any information
-    const data = await db.add(newUser);
+    const data = await db.add(newProduct);
     res.json(data);
     // TODO
   } catch (error) {
@@ -39,10 +39,10 @@ router.put("/:id", async (req, res, next) => {
     //need the id so we know which resource to update
     const id = req.params.id;
     //need the req.body to know what to update the resource to be
-    const updatedUser = req.body;
+    const updatedProduct = req.body;
 
     //actually updates the resource and returns data about how that went
-    const data = await db.update(id, updatedUser);
+    const data = await db.update(id, updatedProduct);
     //informing the requestor how that went
     res.json(data);
     // TODO

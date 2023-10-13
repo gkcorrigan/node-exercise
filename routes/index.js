@@ -1,10 +1,10 @@
 import express from "express";
-import userRouter from "./users.route";
+import productRouter from "./products.route";
 // TODO: import router from users.route
 
 const router = express.Router();
 
-router.use("/users", userRouter);
+router.use("/products", productRouter);
 
 router.get("/test", (req, res) => {
   res.send("working");
